@@ -16,7 +16,8 @@ export default function SuccessPage() {
         // 如果没有登录，重定向到登录页
         router.push('/auth/login')
       } else {
-        setEmail(user.email)
+        // 确保email存在，如果不存在则使用null
+        setEmail(user.email || null)
       }
     }
 
