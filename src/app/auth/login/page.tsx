@@ -57,7 +57,9 @@ export default function LoginPage() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: 'http://localhost:3001/auth/callback'
+          redirectTo: process.env.NODE_ENV === 'production' 
+            ? 'https://denglu2.vercel.app/auth/callback'
+            : 'http://localhost:3001/auth/callback'
         }
       })
 
