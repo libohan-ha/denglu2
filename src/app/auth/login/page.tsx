@@ -66,14 +66,12 @@ export default function LoginPage() {
 
   const handleGoogleLogin = async () => {
     try {
-      // 获取当前URL的端口号
-      const port = window.location.port
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: process.env.NODE_ENV === 'production' 
-            ? 'https://denglu2.vercel.app/auth/callback'
-            : `http://localhost:${port}/auth/callback`
+          redirectTo: window.location.hostname === 'localhost'
+            ? `http://localhost:${window.location.port}/auth/callback`
+            : 'https://denglu2.vercel.app/auth/callback'
         }
       })
 
